@@ -9,6 +9,7 @@ import ConnectionTerminated from "./ConnectionTerminated";
 import GitOps from "././components/clusters/GitOps";
 import SnapshotSettings from "./components/snapshots/Snapshots";
 import SnapshotDetails from "./components/snapshots/SnapshotDetails";
+import SnapshotDetailsSettings from "./components/snapshots/SnapshotDetailsSettings";
 import PreflightResultPage from "./components/PreflightResultPage";
 // import Redactors from "./components/redactors/Redactors";
 // import EditRedactor from "./components/redactors/EditRedactor";
@@ -326,6 +327,7 @@ class Root extends Component {
                   <ProtectedRoute path="/gitops" render={(props) => <GitOps {...props} appName={this.state.selectedAppName} />} />
                   <ProtectedRoute path="/snapshots" render={(props) => <SnapshotSettings {...props} appName={this.state.selectedAppName} />} />
                   <ProtectedRoute path="/snapshot/details" render={(props) => <SnapshotDetails {...props} appName={this.state.selectedAppName} />} />
+                  <ProtectedRoute path="/snapshot/settings" render={(props) => <SnapshotDetailsSettings {...props} appName={this.state.selectedAppName} />} />
                   {/* <ProtectedRoute exact path="/redactors" render={(props) => <Redactors {...props} appName={this.state.selectedAppName} />} />
                   <ProtectedRoute exact path="/redactors/new" render={(props) => <EditRedactor {...props} appName={this.state.selectedAppName} isNew={true} />} />
                   <ProtectedRoute exact path="/redactors/:slug" render={(props) => <EditRedactor {...props} appName={this.state.selectedAppName} />} /> */}

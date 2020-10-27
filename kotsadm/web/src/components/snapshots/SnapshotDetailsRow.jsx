@@ -27,12 +27,15 @@ class SnapshotDetailsRow extends React.Component {
         <div className="flex-column flex1">
           <div className="flex flex-column">
             <p className={`u-fontSize--largest ${isExpired || snapshot?.status === "Deleting" ? "u-color--dustyGray" : "u-color--tuna"} u-lineHeight--normal u-fontWeight--bold u-marginRight--10`}>{snapshot?.name}</p>
-            <div className="flex flex1 u-marginTop--10">
+            <div className="flex flex1 alignItems--center u-marginTop--10">
               <p className="u-fontSize--small u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-marginRight--20">{snapshot?.startedAt ? Utilities.dateFormat(snapshot?.startedAt, "MMM D YYYY @ hh:mm a") : "n/a"}</p>
-              <p className="u-fontSize--small u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-marginRight--20">
-                <span className={`status-indicator u-marginRight--5 ${snapshot?.status.toLowerCase()}`}>{Utilities.snapshotStatusToDisplayName(snapshot?.status)}</span>
+              {snapshot?.status === "Completed" ?
+                <p className="u-fontSize--small u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-marginRight--20">
+                  <span className={`status-indicator u-marginRight--5 ${snapshot?.status.toLowerCase()}`}>{Utilities.snapshotStatusToDisplayName(snapshot?.status)}</span>
                 on {snapshot?.finishedAt ? (snapshot?.finishedAt ? Utilities.dateFormat(snapshot?.finishedAt, "MMM D YYYY @ hh:mm a") : "TBD") : "n/a"}
-              </p>
+                </p> :
+                <span className={`status-indicator u-marginRight--5 ${snapshot?.status.toLowerCase()}`}>{Utilities.snapshotStatusToDisplayName(snapshot?.status)}</span>
+              }
             </div>
           </div>
         </div>
@@ -48,7 +51,7 @@ class SnapshotDetailsRow extends React.Component {
           <div className="flex flex-auto">
             {snapshot?.status === "Completed" &&
               <div className="flex">
-                <span className="icon snapshot-restore-icon u-cursor--pointer" onClick={() => this.handleRestoreClick(snapshot)} data-tip="Restore from this backup"/>
+                <span className="icon snapshot-restore-icon u-cursor--pointer" onClick={() => this.handleRestoreClick(snapshot)} data-tip="Restore from this backup" />
                 <ReactTooltip effect="solid" className="replicated-tooltip" />
               </div>}
             {snapshot?.status !== "InProgress" &&

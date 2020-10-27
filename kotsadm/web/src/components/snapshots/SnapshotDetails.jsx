@@ -6,7 +6,6 @@ import BackupRestoreModal from "../modals/BackupRestoreModal";
 import DeleteSnapshotModal from "../modals/DeleteSnapshotModal";
 
 import "../../scss/components/snapshots/AppSnapshots.scss";
-import { Utilities } from "../../utilities/utilities";
 
 
 class SnapshotDetails extends Component {
@@ -49,7 +48,7 @@ class SnapshotDetails extends Component {
         name: "qakots-g4bjh",
         sequence: 0,
         startedAt: "2020-10-26T22:56:15Z",
-        status: "Completed",
+        status: "PartiallyFailed",
         supportBundleId: "backup-qakots-g4bjh",
         trigger: "manual",
         volumeBytes: 0,
@@ -82,7 +81,7 @@ class SnapshotDetails extends Component {
           <div className="flex flex-auto alignItems--flexStart justifyContent--spaceBetween u-borderBottom--gray darker">
             <p className="u-fontWeight--bold u-color--tuna u-fontSize--larger u-lineHeight--normal u-marginBottom--15">Snapshots</p>
             <div className="flex u-marginBottom--15">
-              <Link to={`/snapshots`} className="replicated-link u-fontSize--small u-fontWeight--bold u-marginRight--20 flex alignItems--center"><span className="icon snapshotSettingsIcon u-marginRight--5" />Settings</Link>
+              <Link to={`/snapshot/settings`} className="replicated-link u-fontSize--small u-fontWeight--bold u-marginRight--20 flex alignItems--center"><span className="icon snapshotSettingsIcon u-marginRight--5" />Settings</Link>
               <span data-for="startSnapshotBtn" data-tip="startSnapshotBtn" data-tip-disable={false}>
                 <button className="btn primary blue"> Start a snapshot</button>
               </span>
