@@ -83,8 +83,6 @@ export class NavBar extends PureComponent {
       selectedTab = "dashboard"
     } else if (pathname === "/snapshots") {
       selectedTab = "snapshots";
-    } else if (pathname === "/snapshot/details") {
-      selectedTab = "snapshot-details";
     }
     this.setState({ selectedTab });
   }
@@ -105,10 +103,6 @@ export class NavBar extends PureComponent {
 
   handleGoToSnapshots = () => {
     this.props.history.push("/snapshots");
-  }
-
-  handleGoToSnapshotDetails = () => {
-    this.props.history.push("/snapshot/details");
   }
 
   redirectToDashboard = () => {
@@ -186,15 +180,6 @@ export class NavBar extends PureComponent {
                     {isSnapshotsSupported &&
                       <div className={classNames("NavItem u-position--relative flex", { "is-active": selectedTab === "snapshots" })}>
                         <span className="HeaderLink flex flex1 u-cursor--pointer" onClick={this.handleGoToSnapshots}>
-                          <span className="text u-fontSize--normal u-fontWeight--medium flex-column justifyContent--center">
-                            <span>Snapshot Settings</span>
-                          </span>
-                        </span>
-                      </div>
-                    }
-                    {isSnapshotsSupported &&
-                      <div className={classNames("NavItem u-position--relative flex", { "is-active": selectedTab === "snapshot-details" })}>
-                        <span className="HeaderLink flex flex1 u-cursor--pointer" onClick={this.handleGoToSnapshotDetails}>
                           <span className="text u-fontSize--normal u-fontWeight--medium flex-column justifyContent--center">
                             <span>Snapshots</span>
                           </span>

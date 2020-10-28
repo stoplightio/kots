@@ -7,9 +7,8 @@ import Modal from "react-modal";
 import find from "lodash/find";
 import ConnectionTerminated from "./ConnectionTerminated";
 import GitOps from "././components/clusters/GitOps";
-import SnapshotSettings from "./components/snapshots/Snapshots";
-import SnapshotDetails from "./components/snapshots/SnapshotDetails";
-import SnapshotDetailsSettings from "./components/snapshots/SnapshotDetailsSettings";
+import Snapshots from "./components/snapshots/Snapshots";
+import SnapshotSettings from "./components/snapshots/SnapshotSettings";
 import ConfigureSnapshots from "./components/snapshots/ConfigureSnapshots";
 import PreflightResultPage from "./components/PreflightResultPage";
 // import Redactors from "./components/redactors/Redactors";
@@ -272,11 +271,11 @@ class Root extends Component {
   toggleConfigureModal = (history) => {
     if (this.state.configureSnapshotsModal) {
       this.setState({ configureSnapshotsModal: false }, () => {
-        history.push("/snapshot/settings");
+        history.push("/snapshots/settings");
       });
     } else {
       this.setState({ configureSnapshotsModal: true }, () => {
-        history.push("/snapshot/settings/configure");
+        history.push("/snapshots/settings/configure");
       });
     }
   };
@@ -339,10 +338,9 @@ class Root extends Component {
                   <Route path="/unsupported" component={UnsupportedBrowser} />
                   <ProtectedRoute path="/cluster/manage" render={(props) => <ClusterNodes {...props} appName={this.state.selectedAppName} />} />
                   <ProtectedRoute path="/gitops" render={(props) => <GitOps {...props} appName={this.state.selectedAppName} />} />
-                  <ProtectedRoute path="/snapshots" render={(props) => <SnapshotSettings {...props} appName={this.state.selectedAppName} />} />
-                  <ProtectedRoute path="/snapshot/details" render={(props) => <SnapshotDetails {...props} appName={this.state.selectedAppName} />} />
-                  <ProtectedRoute exact path="/snapshot/settings" render={(props) => <SnapshotDetailsSettings {...props} appName={this.state.selectedAppName} configureSnapshotsModal={this.state.configureSnapshotsModal} toggleConfigureModal={() => this.toggleConfigureModal(history)} />} />
-                  <ProtectedRoute path="/snapshot/settings/configure" render={(props) => <ConfigureSnapshots {...props} appName={this.state.selectedAppName} configureSnapshotsModal={this.state.configureSnapshotsModal} toggleConfigureModal={() => this.toggleConfigureModal(history)} />} />
+                  <ProtectedRoute exact path="/snapshots" render={(props) => <Snapshots {...props} appName={this.state.selectedAppName} />} />
+                  <ProtectedRoute exact path="/snapshots/settings" render={(props) => <SnapshotSettings {...props} appName={this.state.selectedAppName} configureSnapshotsModal={this.state.configureSnapshotsModal} toggleConfigureModal={() => this.toggleConfigureModal(history)} />} />
+                  <ProtectedRoute path="/snapshots/settings/configure" render={(props) => <ConfigureSnapshots {...props} appName={this.state.selectedAppName} configureSnapshotsModal={this.state.configureSnapshotsModal} toggleConfigureModal={() => this.toggleConfigureModal(history)} />} />
                   {/* <ProtectedRoute exact path="/redactors" render={(props) => <Redactors {...props} appName={this.state.selectedAppName} />} />
                   <ProtectedRoute exact path="/redactors/new" render={(props) => <EditRedactor {...props} appName={this.state.selectedAppName} isNew={true} />} />
                   <ProtectedRoute exact path="/redactors/:slug" render={(props) => <EditRedactor {...props} appName={this.state.selectedAppName} />} /> */}

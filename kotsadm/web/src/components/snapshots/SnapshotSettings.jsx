@@ -10,7 +10,7 @@ import "../../scss/components/shared/SnapshotForm.scss";
 import { Utilities } from "../../utilities/utilities";
 
 
-class SnapshotDetailsSettings extends Component {
+class SnapshotSettings extends Component {
   state = {
     snapshotSettings: null,
     isLoadingSnapshotSettings: true,
@@ -138,7 +138,7 @@ class SnapshotDetailsSettings extends Component {
     return (
       <div className="container flex-column flex1 u-overflow--auto u-paddingTop--30 u-paddingBottom--20 u-marginTop--10 alignItems--center">
         <Helmet>
-          <title>Snapshots</title>
+          <title>Snapshot Settings</title>
         </Helmet>
         {snapshotSettings?.veleroVersion !== "" ?
           <SnapshotStorageDestination
@@ -170,4 +170,4 @@ class SnapshotDetailsSettings extends Component {
   }
 }
 
-export default withRouter(SnapshotDetailsSettings);
+export default withRouter(SnapshotSettings);
