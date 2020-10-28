@@ -124,7 +124,7 @@ class SnapshotDetailsSettings extends Component {
 
 
   render() {
-    const { isLoadingSnapshotSettings, toggleSnapshotView, snapshotSettings, hideCheckVeleroButton, updateConfirm, updatingSettings, updateErrorMsg, isEmptyView } = this.state;
+    const { isLoadingSnapshotSettings, snapshotSettings, hideCheckVeleroButton, updateConfirm, updatingSettings, updateErrorMsg, isEmptyView } = this.state;
     const isLicenseUpload = !!this.props.history.location.search;
 
     if (isLoadingSnapshotSettings) {
@@ -140,7 +140,7 @@ class SnapshotDetailsSettings extends Component {
         <Helmet>
           <title>Snapshots</title>
         </Helmet>
-        {(toggleSnapshotView || (snapshotSettings?.veleroVersion !== "")) ?
+        {snapshotSettings?.veleroVersion !== "" ?
           <SnapshotStorageDestination
             snapshotSettings={snapshotSettings}
             updateSettings={this.updateSettings}
@@ -152,12 +152,19 @@ class SnapshotDetailsSettings extends Component {
             toggleSnapshotView={this.toggleSnapshotView}
             isEmptyView={isEmptyView}
             hideCheckVeleroButton={hideCheckVeleroButton}
-            isLicenseUpload={isLicenseUpload} /> :
+            isLicenseUpload={isLicenseUpload}
+            configureSnapshotsModal={this.props.configureSnapshotsModal}
+            toggleConfigureModal={this.props.toggleConfigureModal} />
+          :
           <ConfigureSnapshots
             snapshotSettings={snapshotSettings}
             fetchSnapshotSettings={this.fetchSnapshotSettings}
             renderNotVeleroMessage={this.renderNotVeleroMessage}
-            hideCheckVeleroButton={hideCheckVeleroButton} />}
+            hideCheckVeleroButton={hideCheckVeleroButton}
+            configureSnapshotsModal={true}
+            toggleConfigureModal={this.toggleConfigureModal}
+          />
+        }
       </div>
     );
   }

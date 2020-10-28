@@ -10,6 +10,7 @@ import GitOps from "././components/clusters/GitOps";
 import SnapshotSettings from "./components/snapshots/Snapshots";
 import SnapshotDetails from "./components/snapshots/SnapshotDetails";
 import SnapshotDetailsSettings from "./components/snapshots/SnapshotDetailsSettings";
+import ConfigureSnapshots from "./components/snapshots/ConfigureSnapshots";
 import PreflightResultPage from "./components/PreflightResultPage";
 // import Redactors from "./components/redactors/Redactors";
 // import EditRedactor from "./components/redactors/EditRedactor";
@@ -79,7 +80,8 @@ class Root extends Component {
     rootDidInitialWatchFetch: false,
     connectionTerminated: false,
     snapshotInProgressApps: [],
-    errLoggingOut: ""
+    errLoggingOut: "",
+    configureSnapshotsModal: false
   };
   /**
    * Sets the Theme State for the whole application
@@ -267,6 +269,18 @@ class Root extends Component {
     })
   }
 
+  toggleConfigureModal = (history) => {
+    if (this.state.configureSnapshotsModal) {
+      this.setState({ configureSnapshotsModal: false }, () => {
+        history.push("/snapshot/settings");
+      });
+    } else {
+      this.setState({ configureSnapshotsModal: true }, () => {
+        history.push("/snapshot/settings/configure");
+      });
+    }
+  };
+
   render() {
     const {
       themeState,
@@ -327,7 +341,8 @@ class Root extends Component {
                   <ProtectedRoute path="/gitops" render={(props) => <GitOps {...props} appName={this.state.selectedAppName} />} />
                   <ProtectedRoute path="/snapshots" render={(props) => <SnapshotSettings {...props} appName={this.state.selectedAppName} />} />
                   <ProtectedRoute path="/snapshot/details" render={(props) => <SnapshotDetails {...props} appName={this.state.selectedAppName} />} />
-                  <ProtectedRoute path="/snapshot/settings" render={(props) => <SnapshotDetailsSettings {...props} appName={this.state.selectedAppName} />} />
+                  <ProtectedRoute exact path="/snapshot/settings" render={(props) => <SnapshotDetailsSettings {...props} appName={this.state.selectedAppName} configureSnapshotsModal={this.state.configureSnapshotsModal} toggleConfigureModal={() => this.toggleConfigureModal(history)} />} />
+                  <ProtectedRoute path="/snapshot/settings/configure" render={(props) => <ConfigureSnapshots {...props} appName={this.state.selectedAppName} configureSnapshotsModal={this.state.configureSnapshotsModal} toggleConfigureModal={() => this.toggleConfigureModal(history)} />} />
                   {/* <ProtectedRoute exact path="/redactors" render={(props) => <Redactors {...props} appName={this.state.selectedAppName} />} />
                   <ProtectedRoute exact path="/redactors/new" render={(props) => <EditRedactor {...props} appName={this.state.selectedAppName} isNew={true} />} />
                   <ProtectedRoute exact path="/redactors/:slug" render={(props) => <EditRedactor {...props} appName={this.state.selectedAppName} />} /> */}
